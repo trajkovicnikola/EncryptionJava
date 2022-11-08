@@ -28,16 +28,12 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class EncryptionGUI extends JFrame {
 
 	private JPanel contentPane;
-	private JScrollPane scrollPane;
 	private JPanel panel;
-	private JScrollPane scrollPane_1;
-	private JLabel lblNewLabel;
-	private JTextArea textMessage;
-	private JTextArea textKey;
 	private JButton btnNewKey;
 	private JButton btnExport;
 	private JButton btnEncrypt;
@@ -45,6 +41,8 @@ public class EncryptionGUI extends JFrame {
 	private JButton btnImport;
 
 	private EncryptionProgram ep = new EncryptionProgram();
+	private JScrollPane scrollPane;
+	private JTextArea textMessage;
 
 	/**
 	 * Launch the application.
@@ -66,7 +64,6 @@ public class EncryptionGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public EncryptionGUI() {
-		setResizable(false);
 		setTitle("Encryption");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 731, 500);
@@ -74,55 +71,16 @@ public class EncryptionGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
-				Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE };
-		contentPane.setLayout(gbl_contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		getPanel().setLayout(null);
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridheight = 6;
-		gbc_panel.insets = new Insets(0, 0, 0, 5);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		contentPane.add(getPanel(), gbc_panel);
-		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-		gbc_scrollPane_1.gridheight = 2;
-		gbc_scrollPane_1.gridwidth = 11;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 1;
-		gbc_scrollPane_1.gridy = 0;
-		contentPane.add(getScrollPane_1_1(), gbc_scrollPane_1);
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 11;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 2;
-		contentPane.add(getLblNewLabel(), gbc_lblNewLabel);
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridheight = 3;
-		gbc_scrollPane.gridwidth = 11;
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 3;
-		contentPane.add(getScrollPane_1(), gbc_scrollPane);
-	}
-
-	private JScrollPane getScrollPane_1() {
-		if (scrollPane == null) {
-			scrollPane = new JScrollPane();
-			scrollPane.setViewportView(getTextArea_1());
-		}
-		return scrollPane;
+		contentPane.add(getPanel(), BorderLayout.WEST);
+		contentPane.add(getScrollPane(), BorderLayout.CENTER);
 	}
 
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
+			panel.setPreferredSize(new Dimension(150, 10));
 			panel.add(getBtnNewKey());
 			panel.add(getBtnExport());
 			panel.add(getBtnEncrypt());
@@ -130,36 +88,6 @@ public class EncryptionGUI extends JFrame {
 			panel.add(getButton_1());
 		}
 		return panel;
-	}
-
-	private JScrollPane getScrollPane_1_1() {
-		if (scrollPane_1 == null) {
-			scrollPane_1 = new JScrollPane();
-			scrollPane_1.setViewportView(getTextArea_1_1());
-		}
-		return scrollPane_1;
-	}
-
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("Message");
-		}
-		return lblNewLabel;
-	}
-
-	private JTextArea getTextArea_1() {
-		if (textMessage == null) {
-			textMessage = new JTextArea();
-		}
-		return textMessage;
-	}
-
-	private JTextArea getTextArea_1_1() {
-		if (textKey == null) {
-			textKey = new JTextArea();
-			textKey.setEditable(false);
-		}
-		return textKey;
 	}
 
 	private JButton getBtnNewKey() {
@@ -275,5 +203,18 @@ public class EncryptionGUI extends JFrame {
 			btnImport.setBounds(6, 88, 117, 29);
 		}
 		return btnImport;
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setViewportView(getTextMessage());
+		}
+		return scrollPane;
+	}
+	private JTextArea getTextMessage() {
+		if (textMessage == null) {
+			textMessage = new JTextArea();
+		}
+		return textMessage;
 	}
 }
