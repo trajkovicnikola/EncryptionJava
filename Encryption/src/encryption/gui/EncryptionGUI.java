@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class EncryptionGUI extends JFrame {
 
@@ -64,8 +66,18 @@ public class EncryptionGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public EncryptionGUI() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int option = JOptionPane.showConfirmDialog(contentPane,
+						"You should export your key before closing." + "\n" + "Are you sure you want to exit?", "Exit",
+						JOptionPane.YES_NO_OPTION);
+				if (option == JOptionPane.YES_OPTION)
+					System.exit(0);
+			}
+		});
 		setTitle("Encryption");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 731, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
